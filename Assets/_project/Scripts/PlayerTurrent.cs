@@ -28,7 +28,7 @@ public class PlayerTurrent : MonoBehaviour {
 
     private void OnEnable() {
         _inputActions.Ship.Fire.performed += OnFire;
-        _fireDelay = 0f;
+        _fireDelay = 0.1f;
     }
 
     private void OnDisable() {
