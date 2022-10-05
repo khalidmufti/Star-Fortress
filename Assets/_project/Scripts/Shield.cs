@@ -21,7 +21,7 @@ public partial class Shield : MonoBehaviour {
     IEnumerator Start() {
         CreateRings();
         while (true) {
-    //        SpinRings();
+            SpinRings();
             yield return null; 
         }
     }

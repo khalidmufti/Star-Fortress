@@ -36,15 +36,38 @@ public class PlayerShip : MonoBehaviour {
     }
     
     private void Start() {
-
     }
 
     private void Update() {
+       AdjustBoundaries();
     }
 
     private void FixedUpdate() {
         ApplyRotation();
         ApplyThrust();
+    }
+
+    private void AdjustBoundaries() {
+        Vector3 viewportPoint;
+        bool isSwap = false;
+
+       viewportPoint = Camera.main.WorldToViewportPoint(_transform.position);
+        if (viewportPoint.x < 0f || viewportPoint.x > 1f) {
+            viewportPoint.x = viewportPoint.x < 0f ? 0.98f : 0.02f;
+            isSwap = true;
+        }
+
+        if (viewportPoint.y < 0f || viewportPoint.y > 1f) {
+            viewportPoint.y = viewportPoint.y < 0f ? 0.98f : 0.02f;
+            isSwap = true;
+        }
+
+        if (isSwap) {
+            Vector3 newViewPort;
+            newViewPort = Camera.main.ViewportToWorldPoint(viewportPoint);
+            newViewPort.z = 0f;
+            _transform.position = newViewPort; 
+        }
     }
 
     private void ApplyRotation() {
